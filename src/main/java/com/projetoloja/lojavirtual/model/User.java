@@ -3,6 +3,8 @@ package com.projetoloja.lojavirtual.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity (name = "tb_user")
@@ -10,7 +12,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "client_id")
     private long id;
     private String name;
     private String email;
@@ -18,6 +19,8 @@ public class User {
     private LocalDate bithday;
     private String password;
     //private String[] roles;
+    @OneToMany (mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
 
     public User(long id, String name, String email, String phone, LocalDate bithday, String password) {
@@ -29,6 +32,14 @@ public class User {
         this.password = password;
     }
 
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     @Override
     public boolean equals(Object object) {
