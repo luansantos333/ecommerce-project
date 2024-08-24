@@ -1,6 +1,6 @@
 package com.projetoloja.lojavirtual.model;
 
-public enum ModelStatus {
+public enum OrderStatus {
 
     WAITING_PAYMENT,
     PAID,
