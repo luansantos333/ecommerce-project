@@ -10,6 +10,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column (columnDefinition = "TIMESTAMP WITHEOUT TIMEZONE")
     private Instant moment;
     private OrderStatus orderStatus;
     @ManyToOne
