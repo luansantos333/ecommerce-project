@@ -1,9 +1,9 @@
 package com.projetoloja.lojavirtual.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity (name = "tb_category")
 public class Category {
@@ -11,6 +11,8 @@ public class Category {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @ManyToMany (mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -20,6 +22,9 @@ public class Category {
         this.name = name;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
 
     public long getId() {
         return id;
