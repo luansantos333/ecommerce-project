@@ -1,90 +1,91 @@
-# Sistema de E-commerce
+# E-commerce System
 
-Este projeto é um sistema de e-commerce que permite o gerenciamento de usuários, produtos e pedidos. O sistema oferece funcionalidades para navegação em um catálogo de produtos, gerenciamento de carrinho de compras, e registro de pedidos.
+This project is an e-commerce system that allows for the management of users, products, and orders. The system offers features for browsing a product catalog, managing a shopping cart, and placing orders.
 
-## Funcionalidades
+## Features
 
-### Cadastro de Usuários
+### User Registration
 
-- **Usuários**: Cada usuário possui os seguintes dados:
-  - Nome
+- **Users**: Each user has the following data:
+  - Name
   - Email
-  - Telefone
-  - Data de nascimento
-  - Senha de acesso
+  - Phone
+  - Date of Birth
+  - Access Password
 
-- **Tipos de Usuário**:
-  - **Cliente**: Usuário padrão com acesso ao catálogo de produtos e ao carrinho de compras.
-  - **Administrador**: Usuário com acesso à área administrativa para gerenciar usuários, produtos e categorias.
+- **User Types**:
+  - **Customer**: Standard user with access to the product catalog and shopping cart.
+  - **Administrator**: User with access to the administrative area to manage users, products, and categories.
 
-- **Cadastro e Navegação**:
-  - Usuários não identificados podem se cadastrar no sistema, navegar no catálogo de produtos e no carrinho de compras.
-  - Clientes podem atualizar seu cadastro, registrar pedidos e visualizar seus próprios pedidos.
+- **Registration and Navigation**:
+  - Unregistered users can sign up for the system, browse the product catalog, and access the shopping cart.
+  - Customers can update their registration, place orders, and view their own orders.
 
-### Cadastro de Produtos
+### Product Registration
 
-- **Produtos**: Cada produto possui os seguintes dados:
-  - Nome
-  - Descrição
-  - Preço
-  - Imagem
+- **Products**: Each product has the following data:
+  - Name
+  - Description
+  - Price
+  - Image
 
-- **Catálogo de Produtos**:
-  - Os produtos são apresentados em um catálogo filtrável pelo nome do produto.
-  - Detalhes do produto estão disponíveis para visualização.
+- **Product Catalog**:
+  - Products are displayed in a catalog that can be filtered by product name.
+  - Product details are available for viewing.
 
-### Carrinho de Compras
+### Shopping Cart
 
-- **Gerenciamento do Carrinho**:
-  - Adicione e remova itens do carrinho de compras.
-  - Altere as quantidades de cada item no carrinho.
+- **Cart Management**:
+  - Add and remove items from the shopping cart.
+  - Change the quantities of each item in the cart.
 
-### Pedidos
+### Orders
 
-- **Registro de Pedidos**:
-  - Ao encerrar o pedido, ele é salvo no sistema com o status "aguardando pagamento".
-  - Dados do pedido:
-    - Instante em que foi salvo
-    - Status do pedido
-    - Lista de itens, incluindo produto e quantidade
+- **Order Registration**:
+  - When an order is placed, it is saved in the system with the status "pending payment".
+  - Order data:
+    - Time it was saved
+    - Order status
+    - List of items, including product and quantity
 
-- **Status do Pedido**:
-  - Aguardando pagamento
-  - Pago
-  - Enviado
-  - Entregue
-  - Cancelado
+- **Order Status**:
+  - Pending payment
+  - Paid
+  - Shipped
+  - Delivered
+  - Canceled
 
-- **Pagamento**:
-  - O instante do pagamento é registrado quando o pedido é pago.
+- **Payment**:
+  - The time of payment is recorded when the order is paid.
 
-### Área Administrativa
+### Administrative Area
 
-- **Funcionalidades para Administradores**:
-  - Acesso ao cadastro e gerenciamento de usuários.
-  - Acesso ao cadastro e gerenciamento de produtos.
-  - Acesso ao cadastro e gerenciamento de categorias.
+- **Administrator Features**:
+  - Access to register and manage users.
+  - Access to register and manage products.
+  - Access to register and manage categories.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- [Insira aqui as tecnologias e ferramentas utilizadas, como Java, Spring Boot, Hibernate, etc.]
+- SpringBoot
+- Hibernate
+- Git
 
-## Instruções para Instalação
+## Installation Instructions
 
-1. Clone o repositório:
+1. Clone the repository:
 
    ```
    git clone https://github.com/usuario/repo.git
 
     Navegue até o diretório do projeto:
     cd nome-do-projeto
+  ``
 
-Configure o ambiente (insira detalhes sobre configuração de banco de dados, variáveis de ambiente, etc.).
+2.Configure the environment (include details about database configuration, environment variables, etc.).
 
-Compile e execute o projeto:
-
-bash
-
+Compile and run the project:
+  ``
     mvn install
     mvn spring-boot:run
-
+  ``
