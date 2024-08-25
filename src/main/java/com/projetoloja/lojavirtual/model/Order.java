@@ -16,6 +16,20 @@ public class Order {
     @ManyToOne
     @JoinColumn (name = "client_id")
     private User client;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
+
+    public Order() {
+    }
+
+    public Order(long id, Instant moment, OrderStatus orderStatus, User client, Payment payment) {
+        this.id = id;
+        this.moment = moment;
+        this.orderStatus = orderStatus;
+        this.client = client;
+        this.payment = payment;
+    }
 
     public long getId() {
         return id;
