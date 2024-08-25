@@ -3,6 +3,8 @@ package com.projetoloja.lojavirtual.model;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity (name = "tb_order")
 public class Order {
@@ -18,7 +20,8 @@ public class Order {
     private User client;
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
-
+    @OneToMany (mappedBy = "id.order")
+    Set<OrderItem> orderItemSet = new HashSet<>();
 
     public Order() {
     }
