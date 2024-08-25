@@ -9,7 +9,7 @@ public class Payment {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @Column (columnDefinition = "TIMESTAMP WITHOUT TIMEZONE")
+    @Column (columnDefinition =  "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
     @OneToOne
     @MapsId
@@ -24,7 +24,6 @@ public class Payment {
         this.moment = moment;
         this.order = order;
     }
-
 
     public long getId() {
         return id;

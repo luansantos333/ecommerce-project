@@ -10,7 +10,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column (columnDefinition = "TIMESTAMP WITHEOUT TIMEZONE")
+    @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
     private OrderStatus orderStatus;
     @ManyToOne
@@ -28,6 +28,23 @@ public class Order {
         this.moment = moment;
         this.orderStatus = orderStatus;
         this.client = client;
+        this.payment = payment;
+    }
+
+
+    public User getClient() {
+        return client;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
