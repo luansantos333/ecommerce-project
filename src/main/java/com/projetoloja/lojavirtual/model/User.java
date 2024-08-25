@@ -23,6 +23,13 @@ public class User {
     private List<Order> orders = new ArrayList<>();
 
 
+
+
+
+    public User() {
+    }
+
+
     public User(long id, String name, String email, String phone, LocalDate bithday, String password) {
         this.id = id;
         this.name = name;
@@ -31,6 +38,7 @@ public class User {
         this.bithday = bithday;
         this.password = password;
     }
+
 
 
     public List<Order> getOrders() {
@@ -52,9 +60,6 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, email, phone, bithday, password);
-    }
-
-    public User() {
     }
 
     public long getId() {
