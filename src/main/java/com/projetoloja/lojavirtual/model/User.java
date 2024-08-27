@@ -17,7 +17,7 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private LocalDate bithday;
+    private LocalDate birth_date;
     private String password;
     //private String[] roles;
     @OneToMany (mappedBy = "client")
@@ -36,7 +36,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.bithday = bithday;
+        this.birth_date = bithday;
         this.password = password;
     }
 
@@ -57,12 +57,12 @@ public class User {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         User user = (User) object;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(bithday, user.bithday) && Objects.equals(password, user.password);
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(birth_date, user.birth_date) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, phone, bithday, password);
+        return Objects.hash(id, name, email, phone, birth_date, password);
     }
 
     public long getId() {
@@ -94,11 +94,11 @@ public class User {
     }
 
     public LocalDate getBithday() {
-        return bithday;
+        return birth_date;
     }
 
     public void setBithday(LocalDate bithday) {
-        this.bithday = bithday;
+        this.birth_date = bithday;
     }
 
     public String getPassword() {

@@ -3,7 +3,7 @@ package com.projetoloja.lojavirtual.model;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
-@Entity (name = "tb_orderitem")
+@Entity (name = "tb_order_item")
 public class OrderItem {
 
     @EmbeddedId
