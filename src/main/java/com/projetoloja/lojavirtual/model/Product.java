@@ -3,6 +3,7 @@ package com.projetoloja.lojavirtual.model;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity (name = "tb_product")
@@ -24,6 +25,9 @@ public class Product {
     @OneToMany (mappedBy = "id.product")
     private Set<OrderItem> orderItemSet = new HashSet<>();
 
+    public Set<OrderItem> getOrderItemSet() {
+        return orderItemSet;
+    }
 
     public Product(long id, String name, String description, double price, String imageURI) {
         this.id = id;
@@ -80,4 +84,13 @@ public class Product {
     public void setImageURI(String imageURI) {
         this.imageURI = imageURI;
     }
+
+
+    public List<Order> getOrderList () {
+
+
+        return orderItemSet.stream().map(x -> x.getOrder()).toList();
+
+    }
+
 }

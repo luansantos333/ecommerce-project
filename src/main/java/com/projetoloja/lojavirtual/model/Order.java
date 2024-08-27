@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity (name = "tb_order")
@@ -74,4 +75,16 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    public Set<OrderItem> getOrderItemSet() {
+        return orderItemSet;
+    }
+
+
+    public List<Product> getProducts () {
+
+        return orderItemSet.stream().map(x -> x.getProduct()).toList();
+    }
+
+
 }
