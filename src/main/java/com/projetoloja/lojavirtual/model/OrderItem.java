@@ -3,6 +3,8 @@ package com.projetoloja.lojavirtual.model;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 
+import java.util.Objects;
+
 @Entity (name = "tb_order_item")
 public class OrderItem {
 
@@ -10,6 +12,8 @@ public class OrderItem {
     private OrderItemPk id = new OrderItemPk();
     private int quantity;
     private double price;
+
+
 
 
     public OrderItem() {
@@ -20,6 +24,20 @@ public class OrderItem {
         this.id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
+    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        OrderItem orderItem = (OrderItem) object;
+        return Objects.equals(id, orderItem.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     public Order getOrder () {

@@ -31,6 +31,19 @@ public class User {
     }
 
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        User user = (User) object;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
     public User(long id, String name, String email, String phone, LocalDate bithday, String password) {
         this.id = id;
         this.name = name;
@@ -50,19 +63,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        User user = (User) object;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(birth_date, user.birth_date) && Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, email, phone, birth_date, password);
     }
 
     public long getId() {

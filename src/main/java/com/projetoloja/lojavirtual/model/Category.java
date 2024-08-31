@@ -3,6 +3,7 @@ package com.projetoloja.lojavirtual.model;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity (name = "tb_category")
@@ -15,6 +16,20 @@ public class Category {
     private Set<Product> products = new HashSet<>();
 
     public Category() {
+    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Category category = (Category) object;
+        return id == category.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     public Category(long id, String name) {

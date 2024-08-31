@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity (name = "tb_order")
@@ -24,6 +25,10 @@ public class Order {
     @OneToMany (mappedBy = "id.order")
     Set<OrderItem> orderItemSet = new HashSet<>();
 
+
+
+
+
     public Order() {
     }
 
@@ -35,6 +40,19 @@ public class Order {
         this.payment = payment;
     }
 
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Order order = (Order) object;
+        return id == order.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     public User getClient() {
         return client;
