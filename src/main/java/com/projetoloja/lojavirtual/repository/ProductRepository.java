@@ -1,4 +1,15 @@
 package com.projetoloja.lojavirtual.repository;
 
-public class ProductRepository {
+import com.projetoloja.lojavirtual.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ProductRepository implements JpaRepository <Long, Product> {
+
+
+
+
+
+
 }
