@@ -1,5 +1,6 @@
 package com.projetoloja.lojavirtual.model;
 
+import com.projetoloja.lojavirtual.dto.ProductDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -29,6 +30,15 @@ public class Product {
     public Set<OrderItem> getOrderItemSet() {
         return orderItemSet;
     }
+
+    public Product (ProductDTO productDTO) {
+        setName(productDTO.getName());
+        setDescription(productDTO.getDescription());
+        setPrice(productDTO.getPrice());
+        setImageURI(productDTO.getImgUrl());
+
+    }
+
 
     public Product(long id, String name, String description, double price, String imageURI) {
         this.id = id;
