@@ -7,6 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping (value = "/products")
@@ -40,7 +43,8 @@ public class ProductController {
     public ResponseEntity<ProductDTO> addNewProduct (@RequestBody ProductDTO dto) {
 
         ProductDTO p = productService.addNewProduct(dto);
-        return ResponseEntity.status(201).body(p);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
+        return ResponseEntity.created(uri).body(p);
 
     }
 
