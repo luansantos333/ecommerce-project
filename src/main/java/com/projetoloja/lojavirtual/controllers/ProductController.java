@@ -4,6 +4,8 @@ import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,21 +21,26 @@ public class ProductController {
 
 
     @GetMapping (value = "/{id}")
-    public ProductDTO findById (@PathVariable (name = "id") Long id) {
+    public ResponseEntity<ProductDTO> findById (@PathVariable (name = "id") Long id) {
 
-        return productService.findById(id);
+        ProductDTO p = productService.findById(id);
+
+        return ResponseEntity.ok(p);
 
     }
 
     @GetMapping
-    public Page<ProductDTO> findAll (Pageable pageable) {
-        return productService.findAll(pageable);
+    public ResponseEntity<Page<ProductDTO>> findAll (Pageable pageable) {
+
+        Page<ProductDTO> all = productService.findAll(pageable);
+        return ResponseEntity.ok(all);
     }
 
     @PostMapping
-    public ProductDTO addNewProduct (@RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> addNewProduct (@RequestBody ProductDTO dto) {
 
-        return productService.addNewProduct(dto);
+        ProductDTO p = productService.addNewProduct(dto);
+        return ResponseEntity.status(201).body(p);
 
     }
 
