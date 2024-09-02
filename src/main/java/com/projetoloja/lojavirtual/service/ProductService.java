@@ -33,11 +33,18 @@ public class ProductService {
         return dto;
     }
 
-
     @Transactional (readOnly = true)
     public Page<ProductDTO> findAll (Pageable pageable) {
         Page<Product> p = productRepository.findAll(pageable);
         return p.map(ProductDTO::new);
+    }
+
+    @Transactional
+    public ProductDTO addNewProduct (ProductDTO p) {
+
+        Product entity = new Product(p);
+        entity = productRepository.save(entity);
+        return new ProductDTO(entity);
     }
 
 
