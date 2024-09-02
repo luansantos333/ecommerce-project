@@ -2,6 +2,8 @@ package com.projetoloja.lojavirtual.service;
 
 import com.projetoloja.lojavirtual.model.Product;
 import com.projetoloja.lojavirtual.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.projetoloja.lojavirtual.dto.*;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +34,10 @@ public class ProductService {
     }
 
 
-    public List<ProductDTO> findAll () {
-        List<Product> p = productRepository.findAll();
-        return p.stream().map(ProductDTO::new).toList();
+    @Transactional (readOnly = true)
+    public Page<ProductDTO> findAll (Pageable pageable) {
+        Page<Product> p = productRepository.findAll(pageable);
+        return p.map(ProductDTO::new);
     }
 
 

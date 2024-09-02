@@ -4,6 +4,8 @@ import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.model.Product;
 import com.projetoloja.lojavirtual.repository.ProductRepository;
 import com.projetoloja.lojavirtual.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +34,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductDTO> findAll () {
-
-        return productService.findAll();
-
+    public Page<ProductDTO> findAll (Pageable pageable) {
+        return productService.findAll(pageable);
     }
 
 }
