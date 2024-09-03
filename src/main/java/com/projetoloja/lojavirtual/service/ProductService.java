@@ -1,16 +1,13 @@
 package com.projetoloja.lojavirtual.service;
 
+import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.model.Product;
 import com.projetoloja.lojavirtual.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.projetoloja.lojavirtual.dto.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +44,26 @@ public class ProductService {
         return new ProductDTO(entity);
     }
 
+    @Transactional
+    public ProductDTO updateProduct (Long id, ProductDTO p) {
+
+        Product entity = productRepository.getReferenceById(id);
+
+        copyDTOToEntity(entity, p);
+
+        entity = productRepository.save(entity);
+
+        return new ProductDTO(entity);
+
+    }
+
+    private void  copyDTOToEntity (Product entity, ProductDTO p) {
+
+        entity.setName(p.getName());
+        entity.setDescription(p.getDescription());
+        entity.setImageURI(p.getImgUrl());
+        entity.setPrice(p.getPrice());
+    }
 
 
 
