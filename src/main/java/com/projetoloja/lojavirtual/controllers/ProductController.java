@@ -2,6 +2,7 @@ package com.projetoloja.lojavirtual.controllers;
 
 import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.service.ProductService;
+import com.projetoloja.lojavirtual.service.exceptions.DatabaseException;
 import com.projetoloja.lojavirtual.service.exceptions.ElementNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,7 +56,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProductById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Void> deleteProductById(@PathVariable(value = "id") Long id) throws DatabaseException {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
 
