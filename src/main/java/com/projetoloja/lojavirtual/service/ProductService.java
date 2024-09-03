@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -55,32 +56,23 @@ public class ProductService {
             copyDTOToEntity(entity, p);
             entity = productRepository.save(entity);
             return new ProductDTO(entity);
-
         } catch (EntityNotFoundException e) {
-
             throw new ElementNotFoundException("Recurso não encontrado");
-
         }
 
     }
 
-    @Transactional
+
+    @Transactional (propagation = Propagation.SUPPORTS)
     public void deleteProduct(Long id) throws DatabaseException {
-
         if (!productRepository.existsById(id)) {
-
             throw new ElementNotFoundException("Recurso não encontrado");
         }
-
         try {
-
             productRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-
             throw new DatabaseException("Falha na integridade relacional");
-
         }
-
 
     }
 
