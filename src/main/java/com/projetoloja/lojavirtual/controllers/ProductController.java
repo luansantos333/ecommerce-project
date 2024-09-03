@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping (value = "/products")
+@RequestMapping(value = "/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -23,8 +23,8 @@ public class ProductController {
     }
 
 
-    @GetMapping (value = "/{id}")
-    public ResponseEntity<ProductDTO> findById (@PathVariable (name = "id") Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable(name = "id") Long id) {
 
         ProductDTO p = productService.findById(id);
 
@@ -33,18 +33,26 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll (Pageable pageable) {
+    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
 
         Page<ProductDTO> all = productService.findAll(pageable);
         return ResponseEntity.ok(all);
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> addNewProduct (@RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> addNewProduct(@RequestBody ProductDTO dto) {
 
         ProductDTO p = productService.addNewProduct(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
         return ResponseEntity.created(uri).body(p);
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> updateProductById(@PathVariable(value = "id") Long id, @RequestBody ProductDTO p) {
+        productService.updateProduct(id, p);
+
+        return ResponseEntity.ok(p);
 
     }
 
