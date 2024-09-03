@@ -1,9 +1,8 @@
 package com.projetoloja.lojavirtual.service.exceptions;
 
-public class ElementNotFoundException extends Exception{
+public class ElementNotFoundException extends RuntimeException{
 
     public ElementNotFoundException() {
-        super();
     }
 
     public ElementNotFoundException(String message) {

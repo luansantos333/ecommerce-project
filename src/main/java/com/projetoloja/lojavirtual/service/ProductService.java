@@ -3,6 +3,7 @@ package com.projetoloja.lojavirtual.service;
 import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.model.Product;
 import com.projetoloja.lojavirtual.repository.ProductRepository;
+import com.projetoloja.lojavirtual.service.exceptions.ElementNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,10 @@ public class ProductService {
 
 
     @Transactional (readOnly = true)
-    public ProductDTO findById (Long id) {
+    public ProductDTO findById (Long id) throws ElementNotFoundException {
 
         Optional<Product> result = productRepository.findById(id);
-        Product p = result.get();
+        Product p = result.orElseThrow(ElementNotFoundException::new);
         ProductDTO dto = new ProductDTO(p.getId(), p.getName(), p.getDescription(), p.getPrice(), p.getImageURI());
         return dto;
     }

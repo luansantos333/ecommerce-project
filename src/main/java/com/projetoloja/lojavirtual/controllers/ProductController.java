@@ -2,9 +2,9 @@ package com.projetoloja.lojavirtual.controllers;
 
 import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.service.ProductService;
+import com.projetoloja.lojavirtual.service.exceptions.ElementNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,7 +24,7 @@ public class ProductController {
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<ProductDTO> findById(@PathVariable(name = "id") Long id) throws ElementNotFoundException {
 
         ProductDTO p = productService.findById(id);
 
