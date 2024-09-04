@@ -4,6 +4,7 @@ import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.service.ProductService;
 import com.projetoloja.lojavirtual.service.exceptions.DatabaseException;
 import com.projetoloja.lojavirtual.service.exceptions.ElementNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> addNewProduct(@RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> addNewProduct(@Valid @RequestBody ProductDTO dto) {
 
         ProductDTO p = productService.addNewProduct(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
@@ -50,7 +51,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProductById(@PathVariable(value = "id") Long id, @RequestBody ProductDTO p) {
+    public ResponseEntity<ProductDTO> updateProductById(@Valid @PathVariable(value = "id") Long id, @RequestBody ProductDTO p) {
         productService.updateProduct(id, p);
         return ResponseEntity.ok(p);
     }

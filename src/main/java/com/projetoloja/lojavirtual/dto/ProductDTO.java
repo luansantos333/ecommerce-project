@@ -1,12 +1,20 @@
 package com.projetoloja.lojavirtual.dto;
 
 import com.projetoloja.lojavirtual.model.Product;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 public class ProductDTO {
 
     private Long id;
+    @Size (message = "O campo deve ter entre 3 e 80 caracteres!", min = 3, max = 80)
+    @NotBlank(message = "O campo nome está em branco!")
     private String name;
+    @NotBlank (message = "A descrição não pode estar vazia!")
+    @Size (message = "A descrição deve ter no mínimo 10 caracteres!", min = 10)
     private String description;
+    @Positive (message = "O preço deve ser maior que zero!")
     private Double price;
     private String imgUrl;
 
