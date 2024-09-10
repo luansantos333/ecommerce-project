@@ -36,18 +36,18 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "productName", defaultValue = "") String productName, Pageable pageable) {
 
-        Page<ProductDTO> all = productService.findAll(pageable);
+        Page<ProductDTO> all = productService.findAll(productName, pageable);
         return ResponseEntity.ok(all);
     }
 
     @PostMapping
     public ResponseEntity<ProductDTO> addNewProduct(@Valid @RequestBody ProductDTO dto) {
 
-            ProductDTO p = productService.addNewProduct(dto);
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
-            return ResponseEntity.created(uri).body(p);
+        ProductDTO p = productService.addNewProduct(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getId()).toUri();
+        return ResponseEntity.created(uri).body(p);
 
 
     }
@@ -64,5 +64,6 @@ public class ProductController {
         return ResponseEntity.noContent().build();
 
     }
+
 
 }
