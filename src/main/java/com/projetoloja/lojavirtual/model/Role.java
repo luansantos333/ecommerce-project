@@ -5,8 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
 
-@Entity
-@Table (name = "tb_roles")
+@Entity (name = "tb_roles")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -20,6 +19,9 @@ public class Role implements GrantedAuthority {
     }
 
 
+
+
+
     public Role() {
     }
 
@@ -29,12 +31,12 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return Objects.equals(id, role.id);
+        return Objects.equals(authority, role.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(authority);
     }
 
     @Override
