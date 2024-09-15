@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.oauth2.server.InMemoryOAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
@@ -43,7 +44,6 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Acce
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.projetoloja.lojavirtual.configuration.customgrant.CustomPasswordAuthenticationConverter;
 import com.projetoloja.lojavirtual.configuration.customgrant.CustomPasswordAuthenticationProvider;
 import com.projetoloja.lojavirtual.configuration.customgrant.CustomUserAuthorities;
@@ -64,11 +64,8 @@ public class AuthorizationServerConfig {
     @Value("${security.jwt.duration}")
     private Integer jwtDurationInSeconds;
 
-    private final UserDetailsService userDetailsService;
-
-    public AuthorizationServerConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    @Autowired
+    private  UserDetailsService userDetailsService;
 
 
     @Bean
@@ -127,7 +124,7 @@ public class AuthorizationServerConfig {
         // @formatter:off
         return TokenSettings.builder()
                 .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
-                .accessTokenTimeToLive(Duration.ofSeconds(jwtDurationSeconds))
+                .accessTokenTimeToLive(Duration.ofSeconds(jwtDurationInSeconds))
                 .build();
         // @formatter:on
     }
