@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,7 +26,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-
+    @PreAuthorize("hasRole ('ROLE_CLIENT')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable(name = "id") Long id) throws ElementNotFoundException {
 
@@ -35,6 +36,7 @@ public class ProductController {
 
     }
 
+
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "productName", defaultValue = "") String productName, Pageable pageable) {
 
@@ -42,6 +44,7 @@ public class ProductController {
         return ResponseEntity.ok(all);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<ProductDTO> addNewProduct(@Valid @RequestBody ProductDTO dto) {
 
@@ -52,12 +55,14 @@ public class ProductController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN'")
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProductById(@Valid @PathVariable(value = "id") Long id, @RequestBody ProductDTO p) {
         productService.updateProduct(id, p);
         return ResponseEntity.ok(p);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN'")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProductById(@PathVariable(value = "id") Long id) throws DatabaseException {
         productService.deleteProduct(id);
