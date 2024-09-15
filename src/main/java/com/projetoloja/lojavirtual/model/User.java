@@ -15,17 +15,17 @@ public class User implements UserDetails {
     private long id;
     @Column (unique = true)
     private String name;
+    @Column (unique = true)
     private String email;
     private String phone;
     private LocalDate birth_date;
     private String password;
-    //private String[] roles;
     @OneToMany (mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
     @ManyToMany
-    @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "client_id"),
+    @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> userRoles;
+    private Set<Role> roles = new HashSet<>();
 
 
     public User() {
@@ -34,12 +34,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return userRoles;
+        return roles;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return getUsername();
     }
 
     @Override
@@ -55,6 +55,10 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
     @Override
@@ -84,13 +88,25 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    //verifies if user object has the role passed in the argument
 
+    public boolean hasRole(String roleName) {
+        for (Role role : roles) {
+            if (role.getAuthority().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // add new role to user object
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 
     public List<Order> getOrders() {
         return orders;
     }
-
-
 
     public void setId(long id) {
         this.id = id;
