@@ -5,6 +5,7 @@ import com.projetoloja.lojavirtual.model.Product;
 import com.projetoloja.lojavirtual.repository.ProductRepository;
 import com.projetoloja.lojavirtual.service.exceptions.DatabaseException;
 import com.projetoloja.lojavirtual.service.exceptions.ElementNotFoundException;
+import com.projetoloja.lojavirtual.dto.ProducMinDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,12 +36,18 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(String productName, Pageable pageable) {
+    public Page<ProducMinDTO> findAll(String productName, Pageable pageable) {
         Page<Product> p = productRepository.searchProductByName(productName, pageable);
-        Page<ProductDTO> dto = p.map(x -> new ProductDTO(x));
+        Page<ProducMinDTO> dto = p.map(x -> new ProducMinDTO(x));
         return dto;
 
     }
+
+
+
+
+
+
 
     @Transactional
     public ProductDTO addNewProduct(ProductDTO p) {
