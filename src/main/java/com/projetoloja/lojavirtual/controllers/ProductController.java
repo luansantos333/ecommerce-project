@@ -29,7 +29,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole ('ROLE_CLIENT')")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable(name = "id") Long id) throws ElementNotFoundException {
+    public ResponseEntity<ProductDTO> findById(@Valid @PathVariable(name = "id") Long id) throws ElementNotFoundException {
 
         ProductDTO p = productService.findById(id);
 
@@ -56,7 +56,7 @@ public class ProductController {
 
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN'")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProductById(@Valid @PathVariable(value = "id") Long id, @RequestBody ProductDTO p) {
         productService.updateProduct(id, p);
