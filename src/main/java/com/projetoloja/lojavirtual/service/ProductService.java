@@ -1,11 +1,13 @@
 package com.projetoloja.lojavirtual.service;
 
+import com.projetoloja.lojavirtual.dto.CategoryDTO;
+import com.projetoloja.lojavirtual.dto.ProducMinDTO;
 import com.projetoloja.lojavirtual.dto.ProductDTO;
+import com.projetoloja.lojavirtual.model.Category;
 import com.projetoloja.lojavirtual.model.Product;
 import com.projetoloja.lojavirtual.repository.ProductRepository;
 import com.projetoloja.lojavirtual.service.exceptions.DatabaseException;
 import com.projetoloja.lojavirtual.service.exceptions.ElementNotFoundException;
-import com.projetoloja.lojavirtual.dto.ProducMinDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -31,8 +33,7 @@ public class ProductService {
 
         Optional<Product> result = productRepository.findById(id);
         Product p = result.orElseThrow(() -> new ElementNotFoundException("Recurso não encontrado"));
-        ProductDTO dto = new ProductDTO(p.getId(), p.getName(), p.getDescription(), p.getPrice(), p.getImageURI());
-        return dto;
+        return new ProductDTO(p);
     }
 
     @Transactional(readOnly = true)
@@ -42,11 +43,6 @@ public class ProductService {
         return dto;
 
     }
-
-
-
-
-
 
 
     @Transactional
@@ -92,6 +88,16 @@ public class ProductService {
         entity.setDescription(p.getDescription());
         entity.setImageURI(p.getImgUrl());
         entity.setPrice(p.getPrice());
+
+        entity.getCategories().clear();
+
+        for (CategoryDTO c : p.getCategories()) {
+
+            Category catEntity = new Category();
+            catEntity.setId(c.getId());
+            entity.getCategories().add(catEntity);
+
+        }
     }
 
 
