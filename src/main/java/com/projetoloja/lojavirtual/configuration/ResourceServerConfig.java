@@ -40,7 +40,7 @@ public class ResourceServerConfig {
         return http.build();
     }
 
-    /*
+
 
     @Bean
     @Order(3)
@@ -52,9 +52,6 @@ public class ResourceServerConfig {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
         return http.build();
     }
-
-
-     */
 
 
     @Bean
@@ -69,7 +66,7 @@ public class ResourceServerConfig {
     }
 
 
-    /*
+
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -88,15 +85,19 @@ public class ResourceServerConfig {
     }
 
 
+    @Bean
+    public CorsFilter corsFilter() {
+        return new CorsFilter(corsConfigurationSource());
+    }
+
 
     @Bean
-    FilterRegistrationBean<CorsFilter> corsFilter() {
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
-                new CorsFilter(corsConfigurationSource()));
+    FilterRegistrationBean<CorsFilter> corsFilterRegistration(CorsFilter corsFilter) {
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(corsFilter);
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
 
-*/
+
 
 }
