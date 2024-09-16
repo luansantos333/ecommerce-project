@@ -1,4 +1,4 @@
-package com.projetoloja.lojavirtual.controllers.handlers;
+package com.projetoloja.lojavirtual.controllers;
 
 import com.projetoloja.lojavirtual.dto.UserDTO;
 import com.projetoloja.lojavirtual.service.UserService;
