@@ -1,5 +1,6 @@
 package com.projetoloja.lojavirtual.controllers;
 
+import com.projetoloja.lojavirtual.dto.ProducMinDTO;
 import com.projetoloja.lojavirtual.dto.ProductDTO;
 import com.projetoloja.lojavirtual.service.ProductService;
 import com.projetoloja.lojavirtual.service.exceptions.DatabaseException;
@@ -38,9 +39,9 @@ public class ProductController {
 
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "productName", defaultValue = "") String productName, Pageable pageable) {
+    public ResponseEntity<Page<ProducMinDTO>> findAll(@RequestParam(name = "productName", defaultValue = "") String productName, Pageable pageable) {
 
-        Page<ProductDTO> all = productService.findAll(productName, pageable);
+        Page<ProducMinDTO> all = productService.findAll(productName, pageable);
         return ResponseEntity.ok(all);
     }
 
