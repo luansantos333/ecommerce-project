@@ -23,8 +23,7 @@ public class Order {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
     @OneToMany (mappedBy = "id.order")
-    Set<OrderItem> orderItemSet = new HashSet<>();
-
+    Set<OrderItem> itens = new HashSet<>();
 
 
 
@@ -95,13 +94,13 @@ public class Order {
     }
 
     public Set<OrderItem> getOrderItemSet() {
-        return orderItemSet;
+        return itens;
     }
 
 
     public List<Product> getProducts () {
 
-        return orderItemSet.stream().map(x -> x.getProduct()).toList();
+        return itens.stream().map(x -> x.getProduct()).toList();
     }
 
 
