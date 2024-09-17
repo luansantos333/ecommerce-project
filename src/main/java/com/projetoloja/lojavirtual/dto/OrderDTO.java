@@ -8,30 +8,33 @@ import jakarta.validation.constraints.NotEmpty;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.DoubleStream;
 
 public class OrderDTO {
 
     private Long id;
     private Instant moment;
     private OrderStatus status;
-    private PaymentDTO paymentDTO;
+    private PaymentDTO payment;
 
-    private ClientDTO clientDTO;
-    @NotEmpty
-    private List<OrderItemDTO> orderItems = new ArrayList<>();
+    private ClientDTO client;
+    @NotEmpty (message = "Deve haver pelo menos um item no pedido!")
+    private List<OrderItemDTO> itens = new ArrayList<>();
     private Double total;
 
 
-    public OrderDTO(Long id, Instant moment, OrderStatus status, PaymentDTO paymentDTO, ClientDTO clientDTO, List<OrderItemDTO> orderItems, Double total) {
+    public OrderDTO(Long id, Instant moment, OrderStatus status, PaymentDTO paymentDTO, ClientDTO clientDTO, List<OrderItemDTO> itens, Double total) {
         this.id = id;
         this.moment = moment;
         this.status = status;
-        this.paymentDTO = paymentDTO;
-        this.clientDTO = clientDTO;
-        this.orderItems = orderItems;
+        this.payment = paymentDTO;
+        this.client = clientDTO;
+        this.itens = itens;
         this.total = total;
     }
+
+
+
+
 
     public OrderDTO(Order entity) {
 
@@ -39,13 +42,13 @@ public class OrderDTO {
         id = entity.getId();
         moment = entity.getMoment();
         status = entity.getOrderStatus();
-        paymentDTO = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
-        clientDTO = new ClientDTO(entity.getClient());
+        payment = (entity.getPayment() == null) ? null : new PaymentDTO(entity.getPayment());
+        client = new ClientDTO(entity.getClient());
 
 
         for (OrderItem o : entity.getOrderItemSet()) {
 
-            orderItems.add(new OrderItemDTO(o));
+            itens.add(new OrderItemDTO(o));
 
         }
 
@@ -55,8 +58,8 @@ public class OrderDTO {
     }
 
 
-    public ClientDTO getClientDTO() {
-        return clientDTO;
+    public ClientDTO getClient() {
+        return client;
     }
 
     public Long getId() {
@@ -71,12 +74,12 @@ public class OrderDTO {
         return status;
     }
 
-    public PaymentDTO getPaymentDTO() {
-        return paymentDTO;
+    public PaymentDTO getPayment() {
+        return payment;
     }
 
-    public List<OrderItemDTO> getOrderItems() {
-        return orderItems;
+    public List<OrderItemDTO> getItens() {
+        return itens;
     }
 
 
@@ -84,7 +87,7 @@ public class OrderDTO {
 
         total = 0.0;
 
-        double[] array = orderItems.stream().mapToDouble(OrderItemDTO::getSubTotal).toArray();
+        double[] array = itens.stream().mapToDouble(OrderItemDTO::getSubTotal).toArray();
 
         for (int i = 0; i < array.length; i++) {
 
