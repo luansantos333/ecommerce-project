@@ -33,7 +33,7 @@ public class OrderController {
     @PreAuthorize("hasRole('ROLE_CLIENT')")
     @PostMapping
     public ResponseEntity<OrderDTO> insertOrder (@Valid @RequestBody OrderDTO dto) {
-        OrderDTO o = orderService.saveOrder(dto);
+        OrderDTO o = orderService.insertOrder(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(o.getId()).toUri();
         return ResponseEntity.created(uri).body(o);
     }
