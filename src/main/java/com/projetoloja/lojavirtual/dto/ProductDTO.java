@@ -2,10 +2,7 @@ package com.projetoloja.lojavirtual.dto;
 
 import com.projetoloja.lojavirtual.model.Category;
 import com.projetoloja.lojavirtual.model.Product;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +16,11 @@ public class ProductDTO {
     @NotBlank(message = "A descrição não pode estar vazia!")
     @Size(message = "A descrição deve ter no mínimo 10 caracteres!", min = 10)
     private String description;
+    @NotNull (message = "Campo requerido!")
     @Positive(message = "O preço deve ser maior que zero!")
     private Double price;
     private String imgUrl;
+
     @NotEmpty (message = "O produto deve ter pelo menos uma categoria!")
     List<CategoryDTO> categories = new ArrayList<>();
 
