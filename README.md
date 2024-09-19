@@ -1,6 +1,9 @@
 # E-commerce System
 
-This project is an e-commerce system that allows for the management of users, products, and orders. The system offers features for browsing a product catalog, managing a shopping cart, and placing orders.
+This project is an e-commerce system that allows for the management of users, products, categories,and orders. The system offers features for browsing a product catalog, managing a shopping cart, and placing orders. 
+
+![image](https://github.com/user-attachments/assets/07c93f0c-d0e1-4c53-861e-b88b253b4370)
+
 
 ## Features
 
@@ -67,9 +70,13 @@ This project is an e-commerce system that allows for the management of users, pr
 
 ## Technologies Used
 
-- SpringBoot
+- SpringBoot 
 - Hibernate
+- SQL
+- JPQL
 - Git
+- OAuth2
+- JWT Token
 
 ## Installation Instructions
 
@@ -89,3 +96,19 @@ Compile and run the project:
     mvn install
     mvn spring-boot:run
   ``
+  
+  Environment variables for dev profile
+
+  ``
+    
+    ${DB_DEV_HOSTNAME}
+    
+    ${DB_DEV_USERNAME}
+    
+    ${DB_DEV_PASSWORD}
+``
+
+# Use cases
+
+![image](https://github.com/user-attachments/assets/b6ee832e-bef4-4434-b691-0a9ad0b56269)
+
