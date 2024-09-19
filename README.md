@@ -81,11 +81,13 @@ This project is an e-commerce system that allows for the management of users, pr
 ## Installation Instructions
 
 1. Clone the repository:
-  ` 
-   git clone [https://github.com/luansantos333/repo.git](https://github.com/luansantos333/ecommerce-project.git]
+
+   ``` 
+   git clone https://github.com/luansantos333/repo.git](https://github.com/luansantos333/ecommerce-project.git
+
    Navegue até o diretório do projeto:
+
    cd nome-do-projeto
-  `
 
 2.Configure the environment (include details about database configuration, environment variables, etc.).
 
