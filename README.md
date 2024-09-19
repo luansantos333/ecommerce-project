@@ -91,22 +91,18 @@ This project is an e-commerce system that allows for the management of users, pr
 
 2.Configure the environment (include details about database configuration, environment variables, etc.).
 
-Compile and run the project:
-  ``
+Compile and run the project:  
+
     mvn install
     mvn spring-boot:run
-  ``
-  
-  Environment variables for dev profile
 
-  ``
-    
+  Environment variables for dev profile
+  
     ${DB_DEV_HOSTNAME}
     
     ${DB_DEV_USERNAME}
     
     ${DB_DEV_PASSWORD}
-``
 
 # Use cases
 
