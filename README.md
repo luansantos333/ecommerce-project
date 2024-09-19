@@ -104,6 +104,12 @@ Compile and run the project:
     
     ${DB_DEV_PASSWORD}
 
+    ${CLIENT_ID}
+
+    ${CLIENT_SECRET}
+    
+    ${CORS_ORIGINS}
+
 # Use cases
 
 ![image](https://github.com/user-attachments/assets/b6ee832e-bef4-4434-b691-0a9ad0b56269)
